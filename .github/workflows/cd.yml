@@ -13,15 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Copy all site files to VM
       - name: Copy website to VM
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}   # use 'deploy' if that’s where the key is installed
+          username: ${{ secrets.VM_USER }}   # azureuser or deploy
           key: ${{ secrets.VM_SSH_KEY }}
-          source: "index.html"
+          source: "./*"                      # copy everything in repo
           target: "/var/www/app"
 
+      # Reload nginx without password prompt
       - name: Reload nginx
         uses: appleboy/ssh-action@v1
         with:
@@ -29,8 +31,10 @@ jobs:
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
-            sudo systemctl reload nginx
+            systemctl reload nginx
 
+      # Health check
       - name: Health check
         run: |
           curl --fail http://${{ secrets.VM_HOST }}
+
