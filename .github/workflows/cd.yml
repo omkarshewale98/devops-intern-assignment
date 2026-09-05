@@ -17,7 +17,7 @@ jobs:
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_USER }}
+          username: ${{ secrets.VM_USER }}   # use 'deploy' if that’s where the key is installed
           key: ${{ secrets.VM_SSH_KEY }}
           source: "index.html"
           target: "/var/www/app"
