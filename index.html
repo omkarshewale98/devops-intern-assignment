@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Simple Website</title>
+  <title>DevOps Demo Page</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,37 +17,18 @@
       padding: 1.5rem;
       text-align: center;
     }
-    nav {
-      margin-top: 10px;
-    }
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
     }
     section {
       padding: 2rem;
       text-align: center;
     }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
     p {
       font-size: 1.2rem;
       max-width: 600px;
       margin: auto;
-    }
-    footer {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
     }
     button {
       background-color: #ff6f61;
@@ -62,36 +43,28 @@
     button:hover {
       background-color: #e85c50;
     }
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Welcome to My Website</h1>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <h1>Welcome to My DevOps Demo</h1>
   </header>
 
-  <section id="home">
-    <h2>Simple & Attractive</h2>
-    <p>This is a clean, minimal HTML page with a modern gradient background and a responsive layout. Perfect for a quick demo or portfolio.</p>
-    <button onclick="alert('Thanks for visiting!')">Click Me</button>
-  </section>
-
-  <section id="about">
-    <h2>About</h2>
-    <p>Built with just HTML and CSS, this page shows how a simple design can still look professional and engaging.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>You can add your email or social links here to make it interactive.</p>
+  <section>
+    <h2>Continuous Deployment in Action</h2>
+    <p>This page was deployed automatically to an Azure VM using GitHub Actions. Every push to <strong>main</strong> updates this site within minutes.</p>
+    <button onclick="alert('Deployment successful!')">Test Button</button>
   </section>
 
   <footer>
-    <p>&copy; 2026 My Simple Website</p>
+    <p>&copy; 2026 DevOps Demo</p>
   </footer>
 </body>
 </html>
