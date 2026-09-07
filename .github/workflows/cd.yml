@@ -13,17 +13,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+
+
       # Copy only the site files, not the whole repo
+
       - name: Copy website to VM
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.VM_HOST }}
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.VM_SSH_KEY }}
+
+
+
           source: "index.html"          # add more filenames, comma-separated, as you create them e.g. "index.html,style.css,script.js"
           target: "/var/www/app"
 
       # Reload nginx via passwordless sudo
+
       - name: Reload nginx
         uses: appleboy/ssh-action@v1
         with:
@@ -33,12 +40,7 @@ jobs:
           script: |
             sudo systemctl reload nginx
 
-      # Health check — fail the job if the site doesn't return 200
       - name: Health check
         run: |
-          code=$(curl -s -o /dev/null -w "%{http_code}" http://${{ secrets.VM_HOST }})
-          echo "Got HTTP status: $code"
-          if [ "$code" != "200" ]; then
-            echo "Health check failed"
-            exit 1
-          fi
+          curl --fail http://${{ secrets.VM_HOST }}
+
