@@ -13,14 +13,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+
+
+      # Copy only the site files, not the whole repo
+
       - name: Copy website to VM
         uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.VM_HOST }}
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.VM_SSH_KEY }}
-          source: "index.html"
+
+
+
+          source: "index.html"          # add more filenames, comma-separated, as you create them e.g. "index.html,style.css,script.js"
           target: "/var/www/app"
+
+      # Reload nginx via passwordless sudo
 
       - name: Reload nginx
         uses: appleboy/ssh-action@v1
@@ -34,3 +43,4 @@ jobs:
       - name: Health check
         run: |
           curl --fail http://${{ secrets.VM_HOST }}
+
